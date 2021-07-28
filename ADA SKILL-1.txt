@@ -1,0 +1,221 @@
+ANGRY PROFFESSOR-
+========================
+import java.util.Scanner;
+public class Solution
+{
+ public static void main(String[] args)
+ {
+
+     Scanner sc=new Scanner(System.in);
+
+     int t=sc.nextInt();
+     for(int i=0;i<t;i++)
+         {
+         int n=sc.nextInt();
+         int k=sc.nextInt();
+         int count=0;
+         for(int j=0;j<n;j++)
+             {
+             int temp=sc.nextInt();
+             if(temp<=0)
+                 count++;
+         }
+         if(count>=k)
+             System.out.println("NO");
+         else
+             System.out.println("YES");
+     }
+ }
+}
+
+FIND DIGITS-
+================================
+import java.util.Scanner;
+
+public class FindDigits {
+
+  static int findDigits(int n) {
+    int count = 0;
+    int num = n;
+    while (n > 0) {
+      int r = n % 10;
+      if (r != 0 && num % r == 0) count++;
+      n = n / 10;
+    }
+    return count;
+  }
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    for (int i = 0; i < n; i++) {
+      int input = sc.nextInt();
+      System.out.println(findDigits(input));
+    }
+    sc.close();
+  }
+}
+
+FORMING A MAGIC SQUARE-
+=====================================
+import java.util.Scanner;
+
+public class FormingAMagicSquare {
+
+  static int formingMagicSquare(int[][] s) {
+    int[][][] magicSquareCombinations = {
+      { { 4, 9, 2 }, { 3, 5, 7 }, { 8, 1, 6 } },
+      { { 8, 3, 4 }, { 1, 5, 9 }, { 6, 7, 2 } },
+      { { 6, 1, 8 }, { 7, 5, 3 }, { 2, 9, 4 } },
+      { { 2, 7, 6 }, { 9, 5, 1 }, { 4, 3, 8 } },
+      { { 2, 9, 4 }, { 7, 5, 3 }, { 6, 1, 8 } },
+      { { 8, 1, 6 }, { 3, 5, 7 }, { 4, 9, 2 } },
+      { { 6, 7, 2 }, { 1, 5, 9 }, { 8, 3, 4 } },
+      { { 4, 3, 8 }, { 9, 5, 1 }, { 2, 7, 6 } },
+    };
+    int minCost = Integer.MAX_VALUE;
+    for (int i = 0; i < magicSquareCombinations.length; i++) {
+      int modifyCost = 0;
+      for (int j = 0; j < 3; j++) {
+        for (int k = 0; k < 3; k++) {
+          modifyCost += Math.abs(s[j][k] - magicSquareCombinations[i][j][k]);
+        }
+      }
+      minCost = Math.min(modifyCost, minCost);
+    }
+    return minCost;
+  }
+
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    int[][] s = new int[3][3];
+    for (int s_i = 0; s_i < 3; s_i++) {
+      for (int s_j = 0; s_j < 3; s_j++) {
+        s[s_i][s_j] = in.nextInt();
+      }
+    }
+    int result = formingMagicSquare(s);
+    System.out.println(result);
+    in.close();
+  }
+}
+
+CLIMBING THE LEADERBOARD-
+===========================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        List<Integer> scores = new ArrayList<Integer>();
+        for (int i = 0; i < n; i++){
+            int score = in.nextInt();
+            if (scores.size() == 0 || scores.get(scores.size() - 1) != score)
+                scores.add(score);
+        }
+        int m = in.nextInt();
+        for (int i = 0; i < m; i++){
+            int score = in.nextInt();
+            int min = 0;
+            int max = scores.size();
+            while (max > min){
+                int mid = (min + max) / 2;
+                if (scores.get(mid) <= score)
+                    max = mid;
+                else
+                    min = mid + 1;
+            }
+            System.out.println(min + 1);
+        }
+    }
+}
+
+MIN-MAX SUM-
+============================
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        long sum = 0;
+        long min = 1000000000;
+        long max = 0;
+        while(scan.hasNext()) {
+            long n = scan.nextLong();
+            sum = sum + n;
+            if (min > n) {
+                min = n;
+            }
+            if (max < n) {
+                max = n;
+            }
+        }
+        scan.close();
+        
+        System.out.println((sum - max) + " " + (sum - min));
+    }
+}
+
+BIRTHDAY CAKE CANDLES-
+==============================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        int a[]=new int[n];
+        int b=0;
+        int c=0;
+        for (int i=0;i<n;i++)
+            a[i]=scan.nextInt();
+        for (int z=0;z<n;z++)
+            if(a[z]>b)
+            {
+            b=a[z];
+        }
+        for (int w=0;w<n;w++)
+            if(a[w]==b)
+            c++;
+            
+            System.out.print(c);
+    }
+}
+
+COMPARING ELEMENTS IN THE ARRAY-
+===========================================
+for _ in range(int(input())):
+    n=int(input())
+    arr=[int(x) for x in input().split()]
+    flag=0
+    for i in range(n):
+        if sum(arr[:i])==sum(arr[i+1:]):
+            flag=1
+            break 
+    if flag==0:
+        print("NO")
+    else:
+        print("YES")
+
+FIND DUPLICATES IN THE GIVEN ARRAY-
+================================================
+n=int(input())
+arr=[int(x) for x in input().split()]
+arr1=set(arr)
+arr1=list(arr1)
+arr1.sort()
+for each in arr1:
+    if arr.count(each)>1:
+        print(each,end=" ")
