@@ -1,0 +1,326 @@
+CEASER CIPHER-
+=================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();input.nextLine();
+        String word = input.nextLine();
+        int rotation = input.nextInt();
+        StringBuilder encryptedWord = new StringBuilder("");
+        for(char c : word.toCharArray())
+        {
+            if(c >= 'a' && c <= 'z')
+                encryptedWord.append((char) ('a'+(((c-'a')+rotation)%26)));
+            else if(c >= 'A' && c <= 'Z')
+                encryptedWord.append((char) ('A'+(((c-'A')+rotation)%26)));
+            else
+                encryptedWord.append(c);
+                
+        }
+        System.out.println(encryptedWord);
+    }
+}
+
+MARS EXPLORATION-
+===============================
+import java.util.*;
+public class Solution {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String S = in.next();
+        int count =0;
+        for(int i=0;i<S.length();i =i+3){
+            if(S.charAt(i)!='S'){
+                count++;
+            } 
+            if(S.charAt(i+1)!='O'){
+                count++;   
+            }
+            if(S.charAt(i+2)!='S'){
+                count ++;
+            }   
+        }
+        System.out.println(count);
+    }
+}
+
+SHERLOCK AND ANAGRAMS-
+=====================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        for(int i=0; i<T; ++i){
+            String str = sc.next().trim();
+            System.out.println(numofAnagram(str));
+        }
+    }
+    
+    public static int numofAnagram(String str){
+        int total = 0;
+        for(int i=1; i<str.length(); ++i){
+            int[] tmpstr = new int[26];
+            
+            for(int j=i; j>=0; --j){
+                tmpstr[str.charAt(j)-'a']++;
+                
+                for(int k=0; k<j; ++k){
+                    int[] chars = new int[26];
+                    int x = k;
+                    int count =0;
+                    while(count<=i-j){
+                        ++chars[str.charAt(x)-'a'];
+                        ++x;
+                        ++count;
+                    }
+                    boolean flag = true;
+                    for(x=0; x<26; ++x){
+                        if(tmpstr[x]!=chars[x]){
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag) ++total;   
+                }
+                
+            }
+        }
+        return total;
+    }
+}
+
+SHERLOCK AND THE VALID STRING-
+=======================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String str = in.next();
+        
+        int[] letters = new int[26];
+        for (int i = 0; i < str.length(); i++) {
+            letters[str.charAt(i) - 'a']++;
+        }
+        if (areEqual(letters, letters[str.charAt(0) - 'a'])) {
+            System.out.println("YES");
+            return;
+        }
+        int base = letters[str.charAt(0) - 'a'];
+        for (int i = 0; i < letters.length; i++) {
+            if (letters[i] != 0) {
+                letters[i]--;
+                if (areEqual(letters, letters[str.charAt(0) - 'a'])) {
+                    System.out.println("YES");
+                    return;
+                }
+                letters[i]++;
+            }
+        }
+        System.out.println("NO");
+    }
+    
+    private static boolean areEqual(int[] letters, int base) {
+        for (int i = 0; i < letters.length; i++) {
+            if (letters[i] != 0 && letters[i] != base) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+SEPARATE THE NUMBERS-
+=================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int q = s.nextInt();
+        for(int i = 0; i < q; i++){
+            String in = s.next();
+            long a = check(in);
+            if (a != -1) {
+                System.out.println("YES " + a);
+            }
+            else {
+                System.out.println("NO");
+            }
+        }
+    }
+    
+    public static long check(String s) {
+        for (int j = 1; j < s.length()+1 && j < 18; j++) {
+            long a = Long.parseLong(s.substring(0, j));
+            long init = a;
+            String temp = "" + a;
+            int count = 1;
+            while (temp.length() < s.length()) {
+                a++;
+                count++;
+                temp += a;
+            }
+            if (temp.equals(s) && count >= 2) {
+                return init;
+            }         
+        }
+        return -1;
+    
+    }
+}
+
+FUNNY STRING-
+===========================
+def funnyString(s):
+    s = [abs(ord(s[i])-ord(s[i+1])) for i in range(len(s)-1)]
+    return "Funny" if list(reversed(s))== s else "Not Funny"
+
+for _ in range(int(input())):
+    print(funnyString(input()))
+
+IN JAVA
+============
+import java.util.*;
+
+public class Solution {
+
+    private static String isFunny(char[] s){
+        boolean funny = true;
+        for(int i = 1, j = s.length - 1; 
+            i < s.length; 
+            i++, j--){
+            if( Math.abs(s[i] - s[i-1]) != Math.abs(s[j] - s[j-1])){
+                funny = false;
+                break;
+            }
+        }
+        return (funny) ? "Funny" : "Not Funny";
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int testCases = scan.nextInt();
+        for(int i = 0; i < testCases; i++){
+            System.out.println(
+                isFunny( scan.next().toCharArray() )
+            );
+        }
+        scan.close();
+    }
+}
+
+GAMES OF THRONES-
+===================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static String gameOfThrones(String s){
+        // Complete this function
+        int lettercount[] = new int[26];
+        for(char ch : s.toCharArray())
+        {
+            lettercount[ch-'a']++;
+        }
+        int counter = 0;
+        for(int i :lettercount)
+        {
+            if( i%2 == 1)
+            {
+                counter++;
+            }
+            if(counter >1)              
+                break;
+        }
+        if(counter <=1)
+        return "YES";
+        else
+        return "NO";
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        String result = gameOfThrones(s);
+        System.out.println(result);
+    }
+}
+
+BEAR AND STUDY GENE-
+======================================
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public static int code(char c) {
+        if (c == 'A') return 0;
+        if (c == 'C') return 1;
+        if (c == 'G') return 2;
+        return 3;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        in.nextLine();
+        String str = in.nextLine();
+        int j = n-1;
+        int[] count = new int[4];
+        while (true) {
+            if (j == -1) {
+                System.out.println("0");
+                return;
+            }
+            if (count[code(str.charAt(j))] + 1 > n/4) {
+                j++;
+                break;
+            }
+            count[code(str.charAt(j))]++;
+            j--;
+        }
+        int result = j;
+        for (int i = 0; i < n; i++) {
+            count[code(str.charAt(i))]++;
+            while(count[code(str.charAt(i))] > n/4) {
+                if (j == n) {
+                    System.out.println(result);
+                    return;
+                }
+                count[code(str.charAt(j))]--;
+                j++;
+            }
+            result = Math.min(result, j - i - 1);
+        }
+        System.out.println(result);
+    }
+}
+
